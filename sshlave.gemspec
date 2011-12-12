@@ -4,12 +4,12 @@ require "sshlave/version"
 
 Gem::Specification.new do |s|
   s.name        = "sshlave"
-  s.version     = Sshlave::VERSION
+  s.version     = SSHlave::VERSION
   s.authors     = ["Konstantin Saveljev"]
   s.email       = ["konstantin.saveljev@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Simple remote server manager over SSH}
+  s.description = %q{Simple remote server manager over SSH}
 
   s.rubyforge_project = "sshlave"
 
