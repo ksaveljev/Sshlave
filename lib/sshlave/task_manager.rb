@@ -8,6 +8,7 @@ module SSHlave
 
     def load_tasks
       Dir[File.join(SSHLAVE_PATH, "tasks/*.rake")].each do |f|
+        puts "loading task " + f.to_s
         load_task(f)
       end
     end
