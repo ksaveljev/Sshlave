@@ -1,5 +1,4 @@
-require "sshlave/version"
-
-module Sshlave
-  # Your code goes here...
+module SSHlave
+  autoload :CLI,      'sshlave/cli.rb'
+  autoload :VERSION,  'sshlave/version.rb'
 end
