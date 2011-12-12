@@ -3,7 +3,7 @@ module SSHlave
     extend self
 
     def start(*args)
-      puts "starting"
+      SSHlave::TaskManager.load_tasks
     end
   end
 end
