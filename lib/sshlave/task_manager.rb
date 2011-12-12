@@ -3,12 +3,15 @@ module SSHlave
     extend self
 
     def tasks
-      @tasks ||= {}
+      @tasks ||= []
+    end
+
+    def desc(*args)
+      @desc = args.shift
     end
 
     def load_tasks
       Dir[File.join(SSHLAVE_PATH, "tasks/*.rake")].each do |f|
-        puts "loading task " + f.to_s
         load_task(f)
       end
     end
@@ -19,12 +22,12 @@ module SSHlave
 
     def server(name, options = {})
       # server = Server.new
-      puts "server definition added"
     end
 
     def task(name, options = {}, &block)
-      # t = Task.new
-      puts "task definition added"
+      tasks.push(Task.new(name, options.merge({desc: @desc}), &block))
+    ensure
+      @desc = nil
     end
   end
 end
