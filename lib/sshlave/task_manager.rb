@@ -38,7 +38,6 @@ module SSHlave
     end
 
     def find_task(name)
-      p name
       tasks.find { |t| t.name == name.to_s } || raise(NotFound, 'Task "%s" not found' % name)
     end
   end
