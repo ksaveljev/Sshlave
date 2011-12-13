@@ -1,3 +1,5 @@
+require 'smart_colored/extend'
+
 SSHLAVE_PATH = ENV['SSHLAVE_PATH'] ||= File.expand_path("~/sshlave") unless defined?(SSHLAVE_PATH)
 
 module SSHlave
