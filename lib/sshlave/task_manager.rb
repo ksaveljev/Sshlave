@@ -13,7 +13,8 @@ module SSHlave
     end
 
     def load_tasks
-      Dir[File.join(SSHLAVE_PATH, "tasks/*.rake")].each do |f|
+      (Dir[File.join(SSHLAVE_PATH, "tasks/*.rake")].flatten <<
+      File.expand_path('../common.rb', __FILE__)).each do |f|
         load_task(f)
       end
     end
