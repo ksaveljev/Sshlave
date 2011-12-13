@@ -1,5 +1,7 @@
 module SSHlave
   class Task
+    attr_reader :name
+
     def initialize(options = {}, &block)
       @name = options.delete(:name)
       @options = options

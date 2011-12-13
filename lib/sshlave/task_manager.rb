@@ -37,7 +37,7 @@ module SSHlave
     end
 
     def find_task(name)
-      tasks.find { |t| t[:name] == name.to_sym } || raise(NotFound, 'Task "%s" not found' % name)
+      tasks.find { |t| t.name == name.to_sym } || raise(NotFound, 'Task "%s" not found' % name)
     end
   end
 end
