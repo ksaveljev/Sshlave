@@ -33,7 +33,7 @@ module SSHlave
     end
 
     def run_task(*task_to_run)
-      task = find_task(args.shift)
+      task = find_task(task_to_run.shift)
     end
 
     def find_task(name)
