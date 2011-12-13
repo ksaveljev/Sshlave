@@ -28,7 +28,7 @@ module SSHlave
     end
 
     def task(name, options = {}, &block)
-      tasks.push(Task.new(options.merge({desc: @desc, name: name.to_sym}), &block))
+      tasks.push(Task.new(options.merge({desc: @desc, name: name.to_s}), &block))
     ensure
       @desc = nil
     end
@@ -39,7 +39,7 @@ module SSHlave
 
     def find_task(name)
       p name
-      tasks.find { |t| t.name == name.to_sym } || raise(NotFound, 'Task "%s" not found' % name)
+      tasks.find { |t| t.name == name.to_s } || raise(NotFound, 'Task "%s" not found' % name)
     end
   end
 end
