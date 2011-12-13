@@ -6,7 +6,7 @@ module SSHlave
       SSHlave::TaskManager.load_tasks
       args.empty? ? SSHlave::TaskManager.run_task(:help) : SSHlave::TaskManager.run_task(*args)
     rescue
-      puts "Sorry, '%s' was not found, see available tasks:".red % args.join(' ').bold
+      puts ("Sorry, '%s' was not found, see available tasks:" % args.join(' ').bold).red
       puts
       SSHlave::TaskManager.run_task(:list)
     end
