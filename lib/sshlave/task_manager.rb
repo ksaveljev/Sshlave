@@ -27,8 +27,7 @@ module SSHlave
     end
 
     def task(name, options = {}, &block)
-      p block
-      tasks.push(Task.new(name, options.merge({desc: @desc}), &block))
+      tasks.push(Task.new(options.merge({desc: @desc, name: name}), &block))
     ensure
       @desc = nil
     end
