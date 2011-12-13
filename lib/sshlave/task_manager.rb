@@ -1,5 +1,7 @@
 module SSHlave
   module TaskManager
+    class NotFound < StandardError; end
+
     extend self
 
     def tasks
@@ -28,6 +30,14 @@ module SSHlave
       tasks.push(Task.new(name, options.merge({desc: @desc}), &block))
     ensure
       @desc = nil
+    end
+
+    def run_task(*task_to_run)
+      task = find_task(args.shift)
+    end
+
+    def find_task(name)
+      tasks.find { |t| t[:name] == name.to_sym } || raise(NotFound, 'Task "%s" not found' % name)
     end
   end
 end
