@@ -4,6 +4,7 @@ module SSHlave
 
     def start(*args)
       SSHlave::TaskManager.load_tasks
+      puts "load_tasks completed"
       puts args.empty? ? "empty" : "not empty"
       args.empty? ? SSHlave::TaskManager.run_task(:help) : SSHlave::TaskManager.run_task(*args)
     rescue
