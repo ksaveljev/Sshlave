@@ -5,7 +5,7 @@ end
 
 desc "show list of available tasks"
 task :list do
-  #formatted = tasks.map { |t| ["sshlave %s".bold % t.name, t.description] }
+  formatted = tasks.map { |t| ["sshlave %s".bold % t.name, t.description] }
   #formatted.each { |f| f[0].gsub!(/\s:/, ' ') }
   #max = formatted.max { |a, b| a[0].size <=> b[0].size }[0].size
   #puts formatted.map { |t, desc| "%s # %s" % [t.ljust(max+2), desc] }.join("\n")
