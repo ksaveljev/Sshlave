@@ -7,7 +7,6 @@ module SSHlave
       @options = options
       @block = block
       @commands = []
-      #build_commands
     end
 
     def build_commands

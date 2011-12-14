@@ -36,6 +36,7 @@ module SSHlave
 
     def run_task(*task_to_run)
       task = find_task(task_to_run.shift)
+      TaskRunner.execute(task)
     end
 
     def find_task(name)
