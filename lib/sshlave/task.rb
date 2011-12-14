@@ -14,6 +14,10 @@ module SSHlave
       self.instance_eval(&@block)
     end
 
+    def description
+      @options[:desc].nil? ? "no description for this task" : @options[:desc]
+    end
+
     def run(command, options = {})
       if command.class == Symbol
         #@commands << options.merge()
