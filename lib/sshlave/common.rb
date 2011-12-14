@@ -13,5 +13,5 @@ end
 
 desc "show help message"
 task :help do
-
+  TaskManager.run_task(:list)
 end
