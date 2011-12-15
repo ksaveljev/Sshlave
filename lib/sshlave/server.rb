@@ -101,7 +101,7 @@ module SSHlave
 
       result = ""
 
-      channel.exec cmd
+      channel.send_data cmd
       channel.on_data do |c, data|
         result << data
 
