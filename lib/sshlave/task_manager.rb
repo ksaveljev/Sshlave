@@ -1,6 +1,7 @@
 module SSHlave
   module TaskManager
-    class NotFound < StandardError; end
+    class TaskNotFound < StandardError; end
+    class ServerNotFound < StandardError; end
 
     extend self
 
@@ -43,7 +44,11 @@ module SSHlave
     end
 
     def find_task(name)
-      tasks.find { |t| t.name == name.to_s } || raise(NotFound, 'Task "%s" not found' % name)
+      tasks.find { |t| t.name == name.to_s } || raise(TaskNotFound, 'Task "%s" not found' % name)
+    end
+
+    def find_server(name)
+      servers[:name] || raise(ServerNotFound, 'Server "%s" not found' % name)
     end
   end
 end

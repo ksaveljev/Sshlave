@@ -12,6 +12,8 @@ module SSHlave
       end
 
       task.servers.each do |server|
+        server = TaskManager.find_server(server)
+
         task.commands.each do |cmd|
           case cmd[:type]
           when :remote
