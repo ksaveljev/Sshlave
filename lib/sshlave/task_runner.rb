@@ -17,10 +17,9 @@ module SSHlave
         task.commands.each do |cmd|
           case cmd[:type]
           when :remote
-            command = cmd.delete(:command)
-            server.run(command, cmd)
+            server.run(cmd[:command], cmd)
           when :local
-            command = cmd.delete(:command)
+
           end
         end
       end
