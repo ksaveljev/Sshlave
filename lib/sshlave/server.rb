@@ -39,10 +39,11 @@ module SSHlave
 
       result = ""
 
-      shell.on_output do |s, data|
-        puts data
+      process = shell.execute! cmd do |p|
+        p.on_output do |p, data|
+          puts data
+        end
       end
-      process = shell.execute! cmd
 
       #channel.on_data do |c, data|
       #  result << data
