@@ -6,12 +6,9 @@ module SSHlave
   class Server
     include SSHlave::Utils
 
-    attr_reader :state
-
     def initialize(name, host, user, options = {})
       @name, @host, @user, @options = name, host, user, options
       @request_pty, @hidden = true, false
-      @state = :closed
     end
 
     def ssh
@@ -56,8 +53,8 @@ module SSHlave
 #          if data =~ match
 #            options[:input] += "\n" if options[:input][-1] != ?\n
 #            channel.send_data(options[:input])
-##            SSHLAVE_LOGGER.puts(options[:input]) unless options[:silent] || options[:hidden] || data =~ /password/i
-          end
+#            SSHLAVE_LOGGER.puts(options[:input]) unless options[:silent] || options[:hidden] || data =~ /password/i
+#          end
 #        end
 #      end
 
