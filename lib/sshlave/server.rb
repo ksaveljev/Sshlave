@@ -23,7 +23,7 @@ module SSHlave
 
     def run(cmd, options = {})
       options[:pty] = @request_pty unless options.has_key?(:pty)
-      options[:hidden] = @hiden unless options.has_key?(:hidden)
+      options[:hidden] = @hidden unless options.has_key?(:hidden)
 
       if options[:as]
         if options[:as] == 'root'
