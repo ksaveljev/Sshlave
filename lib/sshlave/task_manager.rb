@@ -9,7 +9,7 @@ module SSHlave
     end
 
     def servers
-      @servers ||= []
+      @servers ||= {}
     end
 
     def desc(*args)
@@ -27,8 +27,8 @@ module SSHlave
       instance_eval(File.read(path), __FILE__, __LINE__)
     end
 
-    def server(name, options = {})
-      servers.push(Server.new(options.merge({name: name.to_s})))
+    def server(name, host, user, options = {})
+      servers[:name] = Server.new(name, host, user, options)
     end
 
     def task(name, options = {}, &block)

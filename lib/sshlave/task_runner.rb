@@ -7,8 +7,20 @@ module SSHlave
     def execute(task)
       task.build_commands
 
-      if (task.servers.nil? or task.servers.empty? or task.servers.compact.empty?) and task.commands.any? { |c| c[:type] == :remote }
-        raise ConfigurationError, "Task #{task.name.bold} includes remote commands, however no servers were defined for this task. Aborting.".red
+      if task.servers.empty? and task.commands.any? { |c| c[:type] == :remote }
+        raise ConfigurationError, "Task '#{task.name.bold}' includes remote commands, however no servers were defined for this task. Aborting.".red
+      end
+
+      task.servers.each do |server|
+        task.commands.each do |cmd|
+          case cmd[:type]
+          when :remote
+            command = cmd.delete(:command)
+            server.run(cmd.command, cmd)
+          when :local
+            command = cmd.delete(:command)
+          end
+        end
       end
     end
   end

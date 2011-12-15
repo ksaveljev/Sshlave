@@ -9,7 +9,7 @@ module SSHlave
       puts ("Sorry, '%s' was not found, see available tasks:" % args.join(' ').bold).red
       puts
       SSHlave::TaskManager.run_task(:list)
-    rescue SSHlave::TaskRunner::ConfigurationError => e
+    rescue Exception => e
       $stderr << e << "\n"
     end
   end

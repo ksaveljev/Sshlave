@@ -7,7 +7,7 @@ module SSHlave
       @options = options
       @block = block
       @commands = []
-      @servers = options.delete(:servers)
+      @servers = ([] << options.delete(:servers)).flatten.compact
     end
 
     def build_commands
@@ -19,19 +19,11 @@ module SSHlave
     end
 
     def run(command, options = {})
-      if command.class == Symbol
-        #@commands << options.merge()
-      else
-        @commands << options.merge({command: command, type: :remote, from: @name})
-      end
+      @commands << options.merge({command: command, type: :remote})
     end
 
     def local(command, options = {})
-      if command.class == Symbol
-        #@commands << options.merge()
-      else
-        @commands << options.merge({command: command, type: :local, from: @name})
-      end
+      @commands << options.merge({command: command, type: :local})
     end
   end
 end
