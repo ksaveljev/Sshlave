@@ -25,6 +25,8 @@ module SSHlave
 
       ssh.loop { opening? }
 
+      puts "OPENED!"
+
       @channel
     end
 
@@ -65,6 +67,8 @@ module SSHlave
     end
 
     def look_for_initialization_done(channel, data)
+      p data.class
+      p data
       if data.include?(separator)
         @state = :open
       end
