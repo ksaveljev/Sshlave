@@ -16,7 +16,7 @@ module SSHlave
           case cmd[:type]
           when :remote
             command = cmd.delete(:command)
-            server.run(cmd.command, cmd)
+            server.run(command, cmd)
           when :local
             command = cmd.delete(:command)
           end
