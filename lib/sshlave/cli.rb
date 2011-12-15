@@ -10,6 +10,7 @@ module SSHlave
       puts
       SSHlave::TaskManager.run_task(:list)
     rescue Exception => e
+      p e
       $stderr << e << "\n"
     end
   end
