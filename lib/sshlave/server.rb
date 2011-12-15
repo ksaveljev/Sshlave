@@ -39,7 +39,8 @@ module SSHlave
 
       result = ""
 
-      shell.execute cmd
+      process = shell.execute! cmd
+      p process
       #channel.on_data do |c, data|
       #  result << data
 #
@@ -58,7 +59,7 @@ module SSHlave
 #        end
 #      end
 
-      ssh.loop
+      #ssh.loop
 
       result.chomp
     end
