@@ -29,7 +29,7 @@ module SSHlave
     end
 
     def server(name, host, user, options = {})
-      servers[:name] = Server.new(name, host, user, options)
+      servers[name] = Server.new(name, host, user, options)
     end
 
     def task(name, options = {}, &block)
