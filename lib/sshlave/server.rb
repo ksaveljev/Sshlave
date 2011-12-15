@@ -15,6 +15,7 @@ module SSHlave
 
     def channel
       @channel ||= ssh.open_channel
+      channel.request_pty if options[:input] || options[:pty]
     end
 
     def log(msg, new_line = true)
@@ -37,7 +38,6 @@ module SSHlave
 
       result = ""
 
-      channel.request_pty if options[:input] || options[:pty]
       channel.exec cmd
       channel.on_data do |c, data|
         result << data
