@@ -1,4 +1,3 @@
-require 'digest/sha1'
 require 'net/ssh'
 
 module SSHlave
@@ -72,7 +71,7 @@ module SSHlave
 
     def separator
       @separator ||= begin
-        s = Digest::SHA1.hexdigest([session.object_id, object_id, Time.now.to_i, Time.now.usec, rand(0xFFFFFFFF)].join(":"))
+        s = Digest::SHA1.hexdigest([ssh.object_id, object_id, Time.now.to_i, Time.now.usec, rand(0xFFFFFFFF)].join(":"))
         s << Digest::SHA1.hexdigest(s)
       end
     end
