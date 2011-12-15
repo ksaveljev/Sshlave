@@ -61,6 +61,7 @@ module SSHlave
       raise "Crazy thing! Couldn't request shell for our ssh session" unless success
       @channel.on_data(&method(:look_for_initialization_done))
       @channel.send_data "export PS1=; echo #{separator} $?\n"
+      p separator
     end
 
     def look_for_initialization_done(channel, data)
