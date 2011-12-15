@@ -1,3 +1,4 @@
+require 'digest/sha1'
 require 'net/ssh'
 
 module SSHlave
@@ -51,16 +52,30 @@ module SSHlave
     end
 
     def pty_requested(channel, success)
-      #@state = :shell
-      @state = :open
+      @state = :shell
       raise "Crazy thing! Couldn't request pty for our ssh session" unless success
-      #@channel.send_channel_request("shell", &method(:shell_requested))
+      @channel.send_channel_request("shell", &method(:shell_requested))
     end
 
-    #def shell_requested(channel, success)
-    #  @state = :initializing
-    #  raise "Crazy thing! Couldn't request shell for our ssh session" unless success
-    #end
+    def shell_requested(channel, success)
+      @state = :initializing
+      raise "Crazy thing! Couldn't request shell for our ssh session" unless success
+      @channel.on_data(&method(:look_for_initialization_done))
+      @channel.send_data "export PS1=; echo #{separator} $?\n"
+    end
+
+    def look_for_initialization_done(channel, data)
+      if data.include?(separator)
+        @state = :open
+      end
+    end
+
+    def separator
+      @separator ||= begin
+        s = Digest::SHA1.hexdigest([session.object_id, object_id, Time.now.to_i, Time.now.usec, rand(0xFFFFFFFF)].join(":"))
+        s << Digest::SHA1.hexdigest(s)
+      end
+    end
 
     def log(msg, new_line = true)
       super(SSHLAVE_LOGGER_FORMAT % [@user, @name, msg], new_line)
