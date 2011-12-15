@@ -14,7 +14,7 @@ module SSHlave
     end
 
     def channel
-      @ssh.open_channel
+      ssh.open_channel
     end
 
     def log(msg, new_line = true)
