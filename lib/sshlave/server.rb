@@ -1,3 +1,5 @@
+require 'net/ssh'
+
 module SSHlave
   class Server
     include SSHlave::Utils
