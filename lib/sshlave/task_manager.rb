@@ -29,7 +29,7 @@ module SSHlave
     end
 
     def server(name, host, user, options = {})
-      servers[name] = Server.new(name, host, user, options)
+      servers[name.to_sym] = Server.new(name, host, user, options)
     end
 
     def task(name, options = {}, &block)
@@ -48,7 +48,7 @@ module SSHlave
     end
 
     def find_server(name)
-      servers[:name] || raise(ServerNotFound, 'Server "%s" not found' % name)
+      servers[name.to_sym] || raise(ServerNotFound, 'Server "%s" not found' % name)
     end
   end
 end
