@@ -8,6 +8,10 @@ module SSHlave
       @tasks ||= []
     end
 
+    def servers
+      @servers ||= []
+    end
+
     def desc(*args)
       @desc = args.shift
     end
@@ -24,7 +28,7 @@ module SSHlave
     end
 
     def server(name, options = {})
-      # server = Server.new
+      servers.push(Server.new(options.merge({name: name.to_s})))
     end
 
     def task(name, options = {}, &block)

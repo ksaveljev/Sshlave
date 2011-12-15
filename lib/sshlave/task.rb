@@ -1,12 +1,13 @@
 module SSHlave
   class Task
-    attr_reader :name
+    attr_reader :name, :commands, :servers
 
     def initialize(options = {}, &block)
       @name = options.delete(:name)
       @options = options
       @block = block
       @commands = []
+      @servers = options.delete(:servers)
     end
 
     def build_commands
