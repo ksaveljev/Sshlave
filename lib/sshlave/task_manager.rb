@@ -32,8 +32,16 @@ module SSHlave
       servers[name.to_sym] = Server.new(name, host, user, options)
     end
 
+    def namespace(text, &block)
+      namespace_was, @namespace = @namespace, test.to_s
+      @namespace = '%s:%s' % [namespace_was, @namespace] if namespace_was && namespace_was != ''
+      block.call
+    ensure
+      @namespace = namespace_was
+    end
+
     def task(name, options = {}, &block)
-      tasks.push(Task.new(options.merge({desc: @desc, name: name.to_s}), &block))
+      tasks.push(Task.new(options.merge({desc: @desc, name: name.to_s, namespace: @namespace.to_s}), &block))
     ensure
       @desc = nil
     end
@@ -44,7 +52,9 @@ module SSHlave
     end
 
     def find_task(name)
-      tasks.find { |t| t.name == name.to_s } || raise(TaskNotFound, 'Task "%s" not found' % name)
+      spaces = name.to_s.split(":")
+      task = spaces.pop
+      tasks.find { |t| t.name == task && t.namespace == spaces.join(":") } || raise(TaskNotFound, 'Task "%s" not found' % name)
     end
 
     def find_server(name)
