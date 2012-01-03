@@ -33,7 +33,7 @@ module SSHlave
     end
 
     def namespace(text, &block)
-      namespace_was, @namespace = @namespace, test.to_s
+      namespace_was, @namespace = @namespace, text.to_s
       @namespace = '%s:%s' % [namespace_was, @namespace] if namespace_was && namespace_was != ''
       block.call
     ensure
